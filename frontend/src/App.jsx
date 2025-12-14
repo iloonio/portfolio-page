@@ -1,47 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import pfp from '/helvetica-divination-14.png'
+// src/App.jsx (Cleaned Version)
+
 import './App.css'
+// Note: Removed unused imports like useState, Button, Box, and MUI Link
+
+// Import components from react-router-dom and use an alias for Link
+import { Routes, Route, Link as RouterLink } from 'react-router-dom'; 
+
+// Import your page components
+import Home from './pages/Home.jsx';
+import About from './pages/About.jsx';
+
+// (Optional) Import MUI components for a better-looking navigation bar
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography';
 
 
+/* hej hej  */
 function App() {
-  const [count, setCount] = useState(0)
+  // Removed const [count, setCount] = useState(0)
 
   return (
-  <>
-    <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '10vh', 
-        }}>
-      
-        <Link href="https://helveticablanc.com/" target="_blank">
-          <img src={pfp} className="pfp" alt="Profile Picture" width={350} height={350} />
-        </Link>
+    // Note: BrowserRouter has been moved to main.jsx
+    <>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            My App
+          </Typography>
+          
+          {/* Use Button and RouterLink alias for a consistent look */}
+          <Button color="inherit" component={RouterLink} to="/">
+            Home
+          </Button>
+          <Button color="inherit" component={RouterLink} to="/about">
+            About
+          </Button>
+        </Toolbar>
+      </AppBar>
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          ml: 4,
-        }}>
-        <h1>Vite + React</h1>
-        <p>omg i love this</p>
-          </Box>
-
-        
-    </Box>
-
-    
-
-    
-  </>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          {/* Optional: Add a catch-all route */}
+          <Route path="*" element={<h2>404 Page Not Found</h2>} />
+        </Routes>
+      </main>
+    </>
   )
 }
 
-export default App
+export default App;
